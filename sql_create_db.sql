@@ -15,9 +15,9 @@ CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`users`
+-- Table `mydb`.`clients`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`users` (
+CREATE TABLE IF NOT EXISTS `mydb`.`clients` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `adress` VARCHAR(255) NULL,
@@ -30,13 +30,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`orders` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `order_number` VARCHAR(45) NOT NULL,
   `date` DATETIME NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `order_user_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `order_user`
+  CONSTRAINT `order_client`
     FOREIGN KEY (`user_id`)
-    REFERENCES `mydb`.`users` (`id`)
+    REFERENCES `mydb`.`clients` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
